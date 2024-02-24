@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default function Register() {
-  return <>ini register</>;
+    return <div>ini register</div>
 }

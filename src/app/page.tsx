@@ -1,5 +1,7 @@
-import Home from "@/lib/pages/home";
+import React from 'react'
 
-export default function Page() {
-  return <Home />;
+import Home from '@/lib/pages/home'
+
+export default function LandinPage() {
+    return <Home />
 }
