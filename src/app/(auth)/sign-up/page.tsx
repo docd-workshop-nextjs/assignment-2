@@ -2,17 +2,16 @@ import Link from 'next/link'
 import React from 'react'
 
 import { Button } from '@/lib/components/ui/button'
-import { Checkbox } from '@/lib/components/ui/checkbox'
 import { Input } from '@/lib/components/ui/input'
 import { Label } from '@/lib/components/ui/label'
 import SocmedAuth from '@/lib/pages/auth/socmed-auth'
 
-export default function Login() {
+export default function Register() {
     return (
         <>
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Sign in to your account
+                    Sign up to library app account
                 </h2>
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -44,28 +43,20 @@ export default function Login() {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <Checkbox id="remember-me" name="remember-me" />
-                                <Label htmlFor="remember-me" className="ml-3">
-                                    Remember me
-                                </Label>
-                            </div>
-                        </div>
-
                         <div className="flex flex-col gap-3">
                             <Button asChild className="w-full">
-                                <Link href="/main">Sign In</Link>
+                                <Link href="/main">Register</Link>
                             </Button>
                             <Button
                                 asChild
                                 variant="outline"
                                 className="w-full"
                             >
-                                <Link href="/sign-up">Register</Link>
+                                <Link href="/sign-in">Sign In</Link>
                             </Button>
                         </div>
                     </form>
+
                     <SocmedAuth />
                 </div>
             </div>
