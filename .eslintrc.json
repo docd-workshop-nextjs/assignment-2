@@ -14,7 +14,9 @@
                 "optionalDependencies": false,
                 "peerDependencies": false
             }
-        ]
+        ],
+        "react/react-in-jsx-scope": "off",
+        "import/prefer-default-export": ["off"]
     },
     "extends": ["sznm/react", "plugin:@next/next/recommended"]
 }

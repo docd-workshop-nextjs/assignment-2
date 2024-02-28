@@ -101,6 +101,7 @@ TableHead.displayName = 'TableHead'
 
 interface TableCellProps extends React.HTMLAttributes<HTMLTableCellElement> {
     className?: string
+    colSpan?: number
 }
 const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
     ({ className, ...props }, ref) => (
