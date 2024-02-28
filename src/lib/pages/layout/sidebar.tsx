@@ -12,29 +12,45 @@ import {
 } from 'iconsax-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React, { Fragment, useState } from 'react'
 
 import { Button } from '@/lib/components/ui/button'
 import { cn } from '@/lib/utils'
 
 const navigation = [
-    { name: 'Dashboard', href: '/main', icon: Home2, current: true },
+    {
+        name: 'Dashboard',
+        href: '/main',
+        type: 'dashboard',
+        icon: Home2,
+        current: true,
+    },
     {
         name: 'Transactions',
         href: '/main/transactions',
+        type: 'transactions',
         icon: ScanBarcode,
         current: false,
     },
-    { name: 'Books', href: '/main/books', icon: Book1, current: false },
+    {
+        name: 'Books',
+        href: '/main/books',
+        type: 'books',
+        icon: Book1,
+        current: false,
+    },
     {
         name: 'Member',
         href: '/main/member',
+        type: 'member',
         icon: Profile2User,
         current: false,
     },
 ]
 
 export default function Sidebar() {
+    const pathname = usePathname()
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     return (
@@ -123,9 +139,13 @@ export default function Sidebar() {
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                                                                     {
                                                                         'bg-gray-50 text-indigo-600':
-                                                                            item.current,
+                                                                            pathname.includes(
+                                                                                item.type
+                                                                            ),
                                                                         'text-gray-700 hover:bg-gray-50 hover:text-indigo-600':
-                                                                            !item.current,
+                                                                            !pathname.includes(
+                                                                                item.type
+                                                                            ),
                                                                     }
                                                                 )}
                                                             >
@@ -134,9 +154,13 @@ export default function Sidebar() {
                                                                         'h-6 w-6 shrink-0',
                                                                         {
                                                                             'text-indigo-600':
-                                                                                item.current,
+                                                                                pathname.includes(
+                                                                                    item.type
+                                                                                ),
                                                                             'text-gray-400 group-hover:text-indigo-600':
-                                                                                !item.current,
+                                                                                !pathname.includes(
+                                                                                    item.type
+                                                                                ),
                                                                         }
                                                                     )}
                                                                     aria-hidden="true"
@@ -181,7 +205,7 @@ export default function Sidebar() {
                                                 href={item.href}
                                                 className={cn(
                                                     'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                                                    item.current
+                                                    pathname.includes(item.type)
                                                         ? 'bg-gray-50 text-indigo-600'
                                                         : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600'
                                                 )}
@@ -189,7 +213,9 @@ export default function Sidebar() {
                                                 <item.icon
                                                     className={cn(
                                                         'h-6 w-6 shrink-0',
-                                                        item.current
+                                                        pathname.includes(
+                                                            item.type
+                                                        )
                                                             ? 'text-indigo-600'
                                                             : 'text-gray-400 group-hover:text-indigo-600'
                                                     )}

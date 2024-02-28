@@ -12,7 +12,7 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { Add, Setting } from 'iconsax-react'
+import { Setting } from 'iconsax-react'
 import * as React from 'react'
 
 import { Button } from '@/lib/components/ui/button'
@@ -40,7 +40,8 @@ interface DataTableProps<TData, TValue> {
 export default function DataTable<TData, TValue>({
     columns,
     data,
-}: DataTableProps<TData, TValue>) {
+    addEl,
+}: DataTableProps<TData, TValue> & { addEl?: React.ReactElement }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([])
@@ -70,10 +71,8 @@ export default function DataTable<TData, TValue>({
     return (
         <div>
             <div className="flex items-center justify-between py-4">
-                <Button>
-                    <Add className="mr-2" />
-                    Add Item
-                </Button>
+                <div>{addEl}</div>
+
                 <div className="flex items-center gap-2">
                     <Input
                         placeholder="Filter title..."
@@ -119,12 +118,15 @@ export default function DataTable<TData, TValue>({
             </div>
             <div className="rounded-md border">
                 <Table>
-                    <TableHeader>
+                    <TableHeader className="bg-slate-100">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead
+                                            key={header.id}
+                                            className="text-sm font-bold text-slate-900"
+                                        >
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(

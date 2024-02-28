@@ -50,26 +50,52 @@ export const columns: ColumnDef<BooksProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
-
     {
         accessorKey: 'title',
         header: ({ column }) => {
             return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === 'asc')
-                    }
-                >
-                    Title
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
+                <div className="flex items-center gap-2">
+                    <span>Title</span>
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === 'asc')
+                        }
+                    >
+                        <ArrowUpDown className="h-4 w-4" />
+                    </Button>
+                </div>
+            )
+        },
+        cell: ({ row }) => {
+            const books = row.original
+            return (
+                <div className="flex flex-col">
+                    <div className="text-base font-semibold uppercase">
+                        {books.title}
+                    </div>
+                    <p className="text-xs text-slate-500">{books.no}</p>
+                </div>
             )
         },
     },
     {
         accessorKey: 'author',
-        header: 'Author',
+        header: ({ column }) => {
+            return (
+                <div className="flex items-center gap-2">
+                    <span>Author</span>
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === 'asc')
+                        }
+                    >
+                        <ArrowUpDown className="h-4 w-4" />
+                    </Button>
+                </div>
+            )
+        },
     },
     {
         accessorKey: 'status',
@@ -109,7 +135,7 @@ export const columns: ColumnDef<BooksProps>[] = [
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-32 rounded-lg p-0">
+                    <PopoverContent className="w-44 rounded-lg p-0">
                         <div className="flex flex-col">
                             <div className="px-3 py-1.5">
                                 <span className="text-xs font-bold">
@@ -157,7 +183,11 @@ export const columns: ColumnDef<BooksProps>[] = [
                                             <div className="grid gap-4 ">
                                                 <p className="text-base italic text-neutral-500">
                                                     are you sure to delete this
-                                                    item ?
+                                                    item ?<br /> (
+                                                    <span className="text-xs font-medium italic text-red-500">
+                                                        {payment.title}
+                                                    </span>
+                                                    )
                                                 </p>
                                             </div>
                                             <DialogFooter>
